@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Prompt Details - AI Prompt Version Control</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f7ff;
+            color: #172033;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #141b3a,
+                #5b21b6
+            );
+
+            color: white;
+
+            padding: 30px 50px;
+
+            box-shadow:
+                0 4px 15px rgba(31, 41, 55, 0.20);
+        }
+
+        header h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #ddd6fe;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        /* ================= BACK BUTTON ================= */
+
+        .back {
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: #5b21b6;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .back:hover {
+            color: #4f46e5;
+        }
+
+        /* ================= CARDS ================= */
+
+        .card {
+            background: white;
+
+            padding: 28px;
+
+            border-radius: 14px;
+
+            margin-bottom: 25px;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 5px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        /* ================= CATEGORY ================= */
+
+        .category {
+            display: inline-block;
+
+            background: #ede9fe;
+
+            color: #5b21b6;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #ddd6fe;
+        }
+
+        /* ================= HEADINGS ================= */
+
+        h2 {
+            margin-bottom: 18px;
+
+            color: #172033;
+        }
+
+        /* ================= PROMPT ================= */
+
+        .instruction {
+            font-size: 19px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+        /* ================= CONTEXT ================= */
+
+        .context {
+            background: #f8f7ff;
+
+            border-left: 4px solid #7c3aed;
+
+            padding: 16px;
+
+            line-height: 1.6;
+
+            color: #555;
+
+            border-radius: 5px;
+        }
+
+        /* ================= VERSION ================= */
+
+        .version {
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            margin-top: 18px;
+
+            background: #ffffff;
+
+            transition: 0.2s;
+        }
+
+        .version:hover {
+            border-color: #c4b5fd;
+
+            box-shadow:
+                0 5px 15px rgba(91, 33, 182, 0.08);
+        }
+
+        .version-title {
+            color: #5b21b6;
+
+            margin-bottom: 15px;
+
+            font-size: 20px;
+        }
+
+        /* ================= RESPONSE ================= */
+
+        .response {
+            background: #f0fdf4;
+
+            border-left: 4px solid #22c55e;
+
+            padding: 16px;
+
+            margin-top: 15px;
+
+            line-height: 1.6;
+
+            border-radius: 5px;
+        }
+
+        /* ================= CHANGE DESCRIPTION ================= */
+
+        .changes {
+            background: #eef2ff;
+
+            border-left: 4px solid #4f46e5;
+
+            padding: 14px;
+
+            margin-top: 15px;
+
+            line-height: 1.6;
+
+            border-radius: 5px;
+
+            color: #3730a3;
+        }
+
+        /* ================= DATE ================= */
+
+        .date {
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 15px;
+        }
+
+        /* ================= NO VERSION ================= */
+
+        .no-version {
+            color: #777;
+
+            padding: 15px;
+        }
+
+        /* ================= COMPARE BUTTON ================= */
+
+        .compare-button {
+
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 10px 18px;
+
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #4f46e5
+            );
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+
+        }
+
+        .compare-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 15px rgba(79, 70, 229, 0.25);
+
+        }
+
+        /* ================= FORM ================= */
+
+        label {
+
+            color: #334155;
+
+        }
+
+        textarea:focus,
+        input:focus {
+
+            outline: none;
+
+            border-color: #7c3aed !important;
+
+            box-shadow:
+                0 0 0 3px rgba(124, 58, 237, 0.12);
+
+        }
+
+        /* ================= CREATE BUTTON ================= */
+
+        .create-button {
+
+            padding: 12px 22px;
+
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #4f46e5
+            );
+
+            color: white;
+
+            border: none;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+        .create-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 15px rgba(79, 70, 229, 0.25);
+
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 25px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <h1>AI Prompt Version Control</h1>
+
+    <p>
+        View, manage and compare different versions of AI prompts
+    </p>
+
+</header>
+
+
+<!-- ================= MAIN CONTAINER ================= -->
+
+<div class="container">
+
+
+    <!-- ================= BACK ================= -->
+
+    <a href="/" class="back">
+        ← Back to Prompts
+    </a>
+
+
+    <!-- ================= PROMPT INFORMATION ================= -->
+
+    <div class="card">
+
+        <span class="category">
+            {{ prompt.category }}
+        </span>
+
+
+        <h2>
+            {{ prompt.instruction }}
+        </h2>
+
+
+        {% if prompt.context %}
+
+        <div class="context">
+
+            <strong>Context:</strong>
+            <br><br>
+
+            {{ prompt.context }}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= VERSION HISTORY ================= -->
+
+    <div class="card">
+
+        <h2>
+            Version History
+        </h2>
+
+
+        {% if versions %}
+
+
+            {% for version in versions %}
+
+            <div class="version">
+
+
+                <!-- VERSION NUMBER -->
+
+                <h3 class="version-title">
+
+                    Version {{ version.version_number }}
+
+                </h3>
+
+
+                <!-- PROMPT TEXT -->
+
+                {% if version.prompt_text %}
+
+                <p style="line-height:1.6;">
+
+                    <strong>Prompt:</strong>
+
+                    <br><br>
+
+                    {{ version.prompt_text }}
+
+                </p>
+
+                {% endif %}
+
+
+                <!-- CHANGE DESCRIPTION -->
+
+                {% if version.change_description %}
+
+                <div class="changes">
+
+                    <strong>Changes:</strong>
+
+                    <br><br>
+
+                    {{ version.change_description }}
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- AI RESPONSE -->
+
+                {% if version.response %}
+
+                <div class="response">
+
+                    <strong>AI Response:</strong>
+
+                    <br><br>
+
+                    {{ version.response }}
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- CREATED DATE -->
+
+                {% if version.created_at %}
+
+                <p class="date">
+
+                    Created:
+                    {{ version.created_at }}
+
+                </p>
+
+                {% endif %}
+
+
+                <!-- ================= COMPARE BUTTON ================= -->
+
+                {% if version.version_number > 1 %}
+
+                <a
+                    href="/compare/{{ prompt.prompt_id }}/1/{{ version.version_number }}"
+                    class="compare-button"
+                >
+
+                    Compare with Version 1
+
+                </a>
+
+                {% endif %}
+
+
+            </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <p class="no-version">
+
+                No versions available for this prompt.
+
+            </p>
+
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= CREATE NEW VERSION ================= -->
+
+    <div class="card">
+
+        <h2>
+            Create New Prompt Version
+        </h2>
+
+
+        <p style="color:#64748b; margin-bottom:20px;">
+
+            Create a new version of this prompt and record
+            what was changed.
+
+        </p>
+
+
+        <form
+            action="/add_version/{{ prompt.prompt_id }}"
+            method="POST"
+        >
+
+
+            <!-- NEW PROMPT -->
+
+            <label
+                for="prompt_text"
+                style="
+                    display:block;
+                    font-weight:600;
+                    margin-bottom:8px;
+                "
+            >
+
+                New Prompt
+
+            </label>
+
+
+            <textarea
+                id="prompt_text"
+                name="prompt_text"
+                rows="6"
+                required
+                placeholder="Enter the improved prompt..."
+                style="
+                    width:100%;
+                    padding:14px;
+                    border:1px solid #cbd5e1;
+                    border-radius:9px;
+                    font-size:15px;
+                    resize:vertical;
+                    margin-bottom:18px;
+                "
+            ></textarea>
+
+
+            <!-- CHANGE DESCRIPTION -->
+
+            <label
+                for="change_description"
+                style="
+                    display:block;
+                    font-weight:600;
+                    margin-bottom:8px;
+                "
+            >
+
+                Change Description
+
+            </label>
+
+
+            <input
+                type="text"
+                id="change_description"
+                name="change_description"
+                required
+                placeholder="Example: Added clearer instructions"
+                style="
+                    width:100%;
+                    padding:14px;
+                    border:1px solid #cbd5e1;
+                    border-radius:9px;
+                    font-size:15px;
+                    margin-bottom:20px;
+                "
+            >
+
+
+            <!-- CREATE BUTTON -->
+
+            <button
+                type="submit"
+                class="create-button"
+            >
+
+                + Create New Version
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
